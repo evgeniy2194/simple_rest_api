@@ -24,6 +24,13 @@ class DefaultController extends Controller
         $checkInDate = new \DateTime($checkIn);
         $checkOutDate = new \DateTime($checkOut);
 
+        if (!$checkOutDate || !$checkInDate || !$pax) {
+            return new JsonResponse([
+                'error' => 400,
+                'message' => 'Bad request'
+            ]);
+        }
+
         $inventories = $this->getInventories($checkInDate, $checkOutDate);
 
         $data = [];
