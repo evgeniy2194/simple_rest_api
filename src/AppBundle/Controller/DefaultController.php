@@ -19,10 +19,10 @@ class DefaultController extends Controller
     {
         $checkIn = $request->query->get('checkIn');
         $checkOut = $request->query->get('checkOut');
-        $pax = $request->query->get('pax');
+        $pax = (int)$request->query->get('pax');
 
-        $checkInDate = new \DateTime($checkIn);
-        $checkOutDate = new \DateTime($checkOut);
+        $checkInDate = \DateTime::createFromFormat('Y-m-d', $checkIn);
+        $checkOutDate = \DateTime::createFromFormat('Y-m-d', $checkOut);
 
         if (!$checkOutDate || !$checkInDate || !$pax) {
             return new JsonResponse([
@@ -40,9 +40,7 @@ class DefaultController extends Controller
             $maxPax = $inventory['maxPax'];
             $allotment = $inventory['allotment'];
 
-            if (!isset($data[$roomCode])) {
-                $data[$roomCode] = 0;
-            }
+            $data[$roomCode] = $data[$roomCode] ?? 0;
 
             if ($maxPax < $pax || $allotment < 1) {
                 $data[$roomCode] = null;
