@@ -1,0 +1,68 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Inventories
+ *
+ * @ORM\Table(name="inventories")
+ * @ORM\Entity
+ */
+class Inventories
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="room_code", type="string", length=8, nullable=false)
+     */
+    private $roomCode;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="allotment", type="integer", nullable=true)
+     */
+    private $allotment = '0';
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="price", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $price;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime", nullable=true)
+     */
+    private $date;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="discount", type="integer", nullable=true)
+     */
+    private $discount;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="max_pax", type="integer", nullable=true)
+     */
+    private $maxPax = '0';
+
+
+}
+
