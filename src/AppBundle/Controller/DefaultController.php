@@ -2,20 +2,20 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class DefaultController extends Controller
+class DefaultController extends FOSRestController
 {
     /**
      * @param Request $request
-     * @return JsonResponse
-     *
-     * @Route("/hotels", name="hotels")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function getAction(Request $request)
+    public function getHotelsAvailableAction(Request $request)
     {
         $checkIn = $request->query->get('checkIn');
         $checkOut = $request->query->get('checkOut');
@@ -68,7 +68,8 @@ class DefaultController extends Controller
             }
         }
 
-        return new JsonResponse($result);
+        $view = $this->view($result, 200);
+        return $this->handleView($view);
     }
 
     /**
