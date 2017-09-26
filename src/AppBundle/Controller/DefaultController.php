@@ -31,6 +31,9 @@ class DefaultController extends FOSRestController
             ]);
         }
 
+        $checkInDate->setTime(0, 0, 0);
+        $checkOutDate->setTime(0, 0, 0);
+
         $inventories = $this->getInventories($checkInDate, $checkOutDate);
 
         $data = [];
